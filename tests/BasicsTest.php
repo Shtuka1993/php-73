@@ -10,19 +10,24 @@ class BasicsTest extends TestCase
     public function testMagicConstants()
     {
         // The current line number of the file.
-        $this->assertEquals(13, __LINE__);
+        // __LINE__
+        $this->assertEquals(14, __LINE__);
 
         // The function name, or {closure} for anonymous functions.
+        // __FUNCTION__
         $this->assertEquals('testMagicConstants', __FUNCTION__);
 
         // The function name, or {closure} for anonymous functions.
-        // TODO __CLASS__
+        // __CLASS__
+        $this->assertEquals('BasicsTest', __CLASS__);
 
         // The class method name.
-        // TODO __METHOD__
+        //__METHOD__
+        $this->assertEquals('BasicsTest::testMagicConstants', __METHOD__);
 
         // The name of the current namespace.
-        // TODO __NAMESPACE__
+        // __NAMESPACE__
+        $this->assertEquals('', __NAMESPACE__);
     }
 
     /**
@@ -35,21 +40,30 @@ class BasicsTest extends TestCase
         $this->assertEquals(true, (bool) 10);
 
         // Negative integers
-        // TODO (bool) -1
-        // TODO (bool) -10
-        // TODO (bool) 0
+        // (bool) -1 == true
+        $this->assertEquals(true, (bool) -1);
+        // (bool) -10 == true
+        $this->assertEquals(true, (bool) -10);
+        // (bool) 0 == false
+        $this->assertEquals(false, (bool) 0);
 
         // Strings
-        // TODO (bool) ''
-        // TODO (bool) 'false'
-        // TODO (bool) 'not empty string'
+        // (bool) '' == false
+        $this->assertEquals(false, (bool) '');
+        // (bool) 'false' == true
+        $this->assertEquals(true, (bool) 'false');
+        // (bool) 'not empty string' == true
+        $this->assertEquals(true, (bool) 'not empty string');
 
         // Arrays
-        // TODO (bool) []
-        // TODO (bool) [1, 2, 3]
+        // (bool) [] == false
+        $this->assertEquals(false, (bool) []);
+        // (bool) [1, 2, 3]
+        $this->assertEquals(true, (bool) [1, 2, 3]);
 
         // Null
-        // TODO (bool) null
+        // (bool) null
+        $this->assertEquals(false, (bool) null);
     }
 
     /**
@@ -64,13 +78,13 @@ class BasicsTest extends TestCase
         $this->assertEquals(1, 2 - 1);
 
         // Multiplication
-        // TODO to be implemented
+        $this->assertEquals(6, 2 * 3);
 
         // Division
-        // TODO to be implemented
+        $this->assertEquals(3,  27/9);
 
         // Modulo
-        // TODO to be implemented
+        $this->assertEquals(3, 27 % 4);
 
         // Exponentiation
         // TODO to be implemented
@@ -99,10 +113,13 @@ class BasicsTest extends TestCase
         $foo *= 2;
         $this->assertIsInt($foo);
 
-        // TODO $foo = $foo * 1.3;
+        $foo = $foo * 1.3;
+        $this->assertIsFloat($foo);
 
-        // TODO $foo = 5 * '10 Little Piggies';
+        $foo = 5 * '10 Little Piggies';
+        $this->assertIsInt($foo);
 
-        // TODO $foo = 5 * '10 Small Pigs';
+        $foo = 5 * '10 Small Pigs';
+        $this->assertIsInt($foo);
     }
 }
